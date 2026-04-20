@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Training Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --border: #1e1e2e;
+    --muted: #9aa5c4;
+    --accent: #f8f8f2;
+    --green: #22c55e;
+    --red: #ef4444;
+    --amber: #f59e0b;
+    --blue: #3b82f6;
+    --purple: #a855f7;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: var(--bg);
+    color: var(--accent);
+    font-family: 'DM Sans', sans-serif;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 16px 16px 32px;
+    min-height: 100vh;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 0.05em;
+  }
+
+  .title span { color: var(--red); }
+
+  .updated {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    text-align: right;
+  }
+
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .stats-row {
+    display: flex;
+    gap: 0;
+  }
+
+  .stat {
+    flex: 1;
+    text-align: center;
+    padding: 4px 2px;
+    border-right: 1px solid var(--border);
+  }
+
+  .stat:last-child { border-right: none; }
+
+  .stat-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  .stat-lbl {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .exercises {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .exercise {
+    width: 33.333%;
+    text-align: center;
+    padding: 6px 4px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .exercise:nth-child(3n) { border-right: none; }
+  .exercise:nth-last-child(-n+3) { border-bottom: none; }
+
+  .ex-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  .ex-name {
+    font-size: 9px;
+    color: var(--accent);
+    margin-bottom: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 2px;
+  }
+
+  .ex-sets {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    color: var(--muted);
+  }
+
+  /* Schedule */
+  .schedule { margin-bottom: 12px; }
+
+  .day-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .day-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+  }
+
+  .day-card.mon::before { background: var(--red); }
+  .day-card.tue::before { background: var(--amber); }
+  .day-card.wed::before { background: var(--green); }
+  .day-card.thu::before { background: var(--purple); }
+  .day-card.fri::before { background: var(--red); }
+  .day-card.sat::before { background: var(--amber); }
+  .day-card.sun::before { background: var(--green); }
+
+  .day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 12px 6px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .day-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+  }
+
+  .day-focus {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: right;
+  }
+
+  .sessions { padding: 6px 12px 8px 14px; }
+
+  .session-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 2px 0;
+    font-size: 12px;
+  }
+
+  .session-name { flex: 0 0 100px; font-weight: 500; }
+  .session-dur { flex: 0 0 65px; font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); }
+
+  .badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .badge-z1 { background: rgba(59,130,246,0.15); color: var(--blue); border: 1px solid rgba(59,130,246,0.3); }
+  .badge-z2 { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+  .badge-z5 { background: rgba(239,68,68,0.15); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+  .badge-plyo { background: rgba(168,85,247,0.15); color: var(--purple); border: 1px solid rgba(168,85,247,0.3); }
+  .badge-str { background: rgba(245,158,11,0.15); color: var(--amber); border: 1px solid rgba(245,158,11,0.3); }
+
+  .targets-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  .target {
+    text-align: center;
+    padding: 8px 4px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .target:nth-child(3n) { border-right: none; }
+  .target:nth-child(n+4) { border-bottom: none; }
+
+  .target-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  .target-lbl {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="title">TRAIN <span>HARD</span></div>
+  <div class="updated">Updated<br>Mon, Apr 20, 04:23 PM</div>
+</div>
+
+<!-- Power & Recovery -->
+<div class="section">
+    <div class="section-title">Power</div>
+    <div class="stats-row"><div class="stat">
+    <div class="stat-val" style="color:#f59e0b">300w</div>
+    <div class="stat-lbl">FTP</div>
+  </div><div class="stat">
+    <div class="stat-val" style="color:#22c55e">0.7</div>
+    <div class="stat-lbl">CTL</div>
+  </div><div class="stat">
+    <div class="stat-val" style="color:#ef4444">3.7</div>
+    <div class="stat-lbl">ATL</div>
+  </div><div class="stat">
+    <div class="stat-val" style="color:#f59e0b">--</div>
+    <div class="stat-lbl">Form</div>
+  </div></div>
+  </div>
+
+<div class="section">
+    <div class="section-title">Recovery</div>
+    <div class="stats-row"><div class="stat">
+    <div class="stat-val" style="color:#22c55e">84</div>
+    <div class="stat-lbl">Readiness</div>
+  </div><div class="stat">
+    <div class="stat-val" style="color:#22c55e">23ms</div>
+    <div class="stat-lbl">HRV</div>
+  </div><div class="stat">
+    <div class="stat-val" style="color:#f8f8f2">48 bpm</div>
+    <div class="stat-lbl">Rest HR</div>
+  </div><div class="stat">
+    <div class="stat-val" style="color:#f59e0b">6.6h</div>
+    <div class="stat-lbl">Sleep</div>
+  </div></div>
+  </div>
+
+<div class="section">
+    <div class="section-title">Last Intervals · 2026-04-13 · 16m</div>
+    <div class="stats-row"><div class="stat">
+    <div class="stat-val" style="color:#f59e0b">353w</div>
+    <div class="stat-lbl">Avg Watts</div>
+  </div><div class="stat">
+    <div class="stat-val" style="color:#f59e0b">349w</div>
+    <div class="stat-lbl">NP</div>
+  </div><div class="stat">
+    <div class="stat-val" style="color:#f8f8f2">159 bpm</div>
+    <div class="stat-lbl">Avg HR</div>
+  </div><div class="stat">
+    <div class="stat-val" style="color:#f8f8f2">189 bpm</div>
+    <div class="stat-lbl">Max HR</div>
+  </div></div>
+  </div>
+
+<div class="section">
+    <div class="section-title">Last Strength · 2026-04-19 · Squat Strength · 63m</div>
+    <div class="exercises">
+    <div class="exercise">
+      <div class="ex-val" style="color:#f59e0b">235lb</div>
+      <div class="ex-name">Squat</div>
+      <div class="ex-sets">3×2</div>
+    </div>
+    <div class="exercise">
+      <div class="ex-val" style="color:#f59e0b">110lb</div>
+      <div class="ex-name">Overhead Press</div>
+      <div class="ex-sets">3×3</div>
+    </div>
+    <div class="exercise">
+      <div class="ex-val" style="color:#f59e0b">10lb</div>
+      <div class="ex-name">Pull Up</div>
+      <div class="ex-sets">3×3</div>
+    </div>
+    <div class="exercise">
+      <div class="ex-val" style="color:#f59e0b">165lb</div>
+      <div class="ex-name">Split Squat</div>
+      <div class="ex-sets">2×6</div>
+    </div>
+    <div class="exercise">
+      <div class="ex-val" style="color:#f59e0b">20lb</div>
+      <div class="ex-name">Cable Core Palloff Press</div>
+      <div class="ex-sets">2×10</div>
+    </div>
+    <div class="exercise">
+      <div class="ex-val" style="color:#f59e0b">58s</div>
+      <div class="ex-name">Copenhagen</div>
+      <div class="ex-sets">1×?</div>
+    </div></div>
+  </div>
+<div class="section">
+    <div class="section-title">Prev Strength · 2026-04-16 · Plyos · 72m</div>
+    <div class="exercises">
+    <div class="exercise">
+      <div class="ex-val" style="color:#f59e0b">3r</div>
+      <div class="ex-name">Depth Drops</div>
+      <div class="ex-sets">3×3</div>
+    </div>
+    <div class="exercise">
+      <div class="ex-val" style="color:#f59e0b">50cm</div>
+      <div class="ex-name">Squat Jump Height</div>
+      <div class="ex-sets">2×?</div>
+    </div>
+    <div class="exercise">
+      <div class="ex-val" style="color:#f59e0b">53lb</div>
+      <div class="ex-name">Weighted Jump Lunge</div>
+      <div class="ex-sets">3×3</div>
+    </div>
+    <div class="exercise">
+      <div class="ex-val" style="color:#f59e0b">53lb</div>
+      <div class="ex-name">Weighted Squat Jump</div>
+      <div class="ex-sets">3×3</div>
+    </div>
+    <div class="exercise">
+      <div class="ex-val" style="color:#f59e0b">168lb</div>
+      <div class="ex-name">Weighted Step Up</div>
+      <div class="ex-sets">1×3</div>
+    </div>
+    <div class="exercise">
+      <div class="ex-val" style="color:#f59e0b">23lb</div>
+      <div class="ex-name">Pull Up</div>
+      <div class="ex-sets">3×3</div>
+    </div></div>
+  </div>
+
+<!-- Weekly Schedule -->
+<div class="schedule">
+
+  <div class="day-card mon">
+    <div class="day-header"><div class="day-name">Monday</div><div class="day-focus">Walk + Intervals (4×4)</div></div>
+    <div class="sessions">
+      <div class="session-row"><div class="session-name">Fast Walk</div><div class="session-dur">20–30 min</div><div class="badge badge-z1">Z1</div></div>
+      <div class="session-row"><div class="session-name">Intervals</div><div class="session-dur">20–25 min</div><div class="badge badge-z5">Z5</div></div>
+    </div>
+  </div>
+
+  <div class="day-card tue">
+    <div class="day-header"><div class="day-name">Tuesday</div><div class="day-focus">Walk + Strength + Z2 Run</div></div>
+    <div class="sessions">
+      <div class="session-row"><div class="session-name">Fast Walk</div><div class="session-dur">20–30 min</div><div class="badge badge-z1">Z1</div></div>
+      <div class="session-row"><div class="session-name">Strength</div><div class="session-dur">60–75 min</div><div class="badge badge-str">STR</div></div>
+      <div class="session-row"><div class="session-name">Run</div><div class="session-dur">30 min</div><div class="badge badge-z2">Z2</div></div>
+    </div>
+  </div>
+
+  <div class="day-card wed">
+    <div class="day-header"><div class="day-name">Wednesday</div><div class="day-focus">Walk + Hot Yoga</div></div>
+    <div class="sessions">
+      <div class="session-row"><div class="session-name">Fast Walk</div><div class="session-dur">20–30 min</div><div class="badge badge-z1">Z1</div></div>
+      <div class="session-row"><div class="session-name">Hot Yoga</div><div class="session-dur">75–90 min</div><div class="badge badge-z2">Z2</div></div>
+    </div>
+  </div>
+
+  <div class="day-card thu">
+    <div class="day-header"><div class="day-name">Thursday</div><div class="day-focus">Walk + Long Plyos + Z2</div></div>
+    <div class="sessions">
+      <div class="session-row"><div class="session-name">Fast Walk</div><div class="session-dur">20–30 min</div><div class="badge badge-z1">Z1</div></div>
+      <div class="session-row"><div class="session-name">Plyometrics</div><div class="session-dur">25–30 min</div><div class="badge badge-plyo">PLYO</div></div>
+      <div class="session-row"><div class="session-name">Cardio</div><div class="session-dur">30 min</div><div class="badge badge-z2">Z2</div></div>
+    </div>
+  </div>
+
+  <div class="day-card fri">
+    <div class="day-header"><div class="day-name">Friday</div><div class="day-focus">Walk + Short Intervals</div></div>
+    <div class="sessions">
+      <div class="session-row"><div class="session-name">Fast Walk</div><div class="session-dur">20–30 min</div><div class="badge badge-z1">Z1</div></div>
+      <div class="session-row"><div class="session-name">Intervals</div><div class="session-dur">15–20 min</div><div class="badge badge-z5">Z5</div></div>
+    </div>
+  </div>
+
+  <div class="day-card sat">
+    <div class="day-header"><div class="day-name">Saturday</div><div class="day-focus">Strength + Walk</div></div>
+    <div class="sessions">
+      <div class="session-row"><div class="session-name">Strength</div><div class="session-dur">60–75 min</div><div class="badge badge-str">STR</div></div>
+      <div class="session-row"><div class="session-name">Fast Walk</div><div class="session-dur">20–30 min</div><div class="badge badge-z1">Z1</div></div>
+    </div>
+  </div>
+
+  <div class="day-card sun">
+    <div class="day-header"><div class="day-name">Sunday</div><div class="day-focus">Long Cardio + Plyos App</div></div>
+    <div class="sessions">
+      <div class="session-row"><div class="session-name">Cardio</div><div class="session-dur">60–90 min</div><div class="badge badge-z2">Z2</div></div>
+      <div class="session-row"><div class="session-name">Plyometrics</div><div class="session-dur">10 min</div><div class="badge badge-plyo">PLYO</div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Weekly Targets -->
+<div class="section">
+  <div class="section-title">Weekly Targets</div>
+  <div class="targets-grid">
+    <div class="target"><div class="target-val" style="color:#22c55e">3.5–4.5h</div><div class="target-lbl">Zone 2</div></div>
+    <div class="target"><div class="target-val" style="color:#ef4444">90–120m</div><div class="target-lbl">Z4–5</div></div>
+    <div class="target"><div class="target-val" style="color:#3b82f6">~150m</div><div class="target-lbl">Walking</div></div>
+    <div class="target"><div class="target-val" style="color:#f8f8f2">5.5–6.5h</div><div class="target-lbl">Cardio</div></div>
+    <div class="target"><div class="target-val" style="color:#f59e0b">2×</div><div class="target-lbl">Strength</div></div>
+    <div class="target"><div class="target-val" style="color:#a855f7">2×</div><div class="target-lbl">Plyo</div></div>
+  </div>
+</div>
+
+</body>
+</html>
