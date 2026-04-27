@@ -250,20 +250,13 @@
     color: var(--muted);
     text-transform: uppercase;
   }
-
-  .zv-row { display: grid; grid-template-columns: 70px 1fr 90px; align-items: center; gap: 10px; padding: 5px 0; }
-  .zv-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-  .zv-bar { height: 10px; background: rgba(255,255,255,0.05); border-radius: 2px; overflow: hidden; }
-  .zv-fill { height: 100%; transition: width .3s; }
-  .zv-vals { font-family: 'Bebas Neue', sans-serif; font-size: 22px; line-height: 1; text-align: right; }
-  .zv-target { color: var(--muted); font-size: 13px; margin-left: 4px; }
 </style>
 </head>
 <body>
 
 <div class="header">
   <div class="title">TRAIN <span>HARD</span></div>
-  <div class="updated">Updated<br>Sun, Apr 26, 10:33 PM</div>
+  <div class="updated">Updated<br>Sun, Apr 26, 10:40 PM</div>
 </div>
 
 <!-- Power & Recovery -->
@@ -302,26 +295,6 @@
   </div>
 
 
-
-<div class="section">
-    <div class="section-title">Weekly Volume · Rolling 7d</div>
-    
-      <div class="zv-row">
-        <div class="zv-label">Walking</div>
-        <div class="zv-bar"><div class="zv-fill" style="width:100%;background:#22c55e"></div></div>
-        <div class="zv-vals"><span class="zv-actual" style="color:#22c55e">166</span><span class="zv-target">/ 150m</span></div>
-      </div>
-      <div class="zv-row">
-        <div class="zv-label">Z2</div>
-        <div class="zv-bar"><div class="zv-fill" style="width:37.142857142857146%;background:#ef4444"></div></div>
-        <div class="zv-vals"><span class="zv-actual" style="color:#ef4444">78</span><span class="zv-target">/ 210m</span></div>
-      </div>
-      <div class="zv-row">
-        <div class="zv-label">Z4+Z5</div>
-        <div class="zv-bar"><div class="zv-fill" style="width:100%;background:#22c55e"></div></div>
-        <div class="zv-vals"><span class="zv-actual" style="color:#22c55e">32</span><span class="zv-target">/ 20m</span></div>
-      </div>
-  </div>
 
 <div class="section">
     <div class="section-title">Last Intervals · 2026-04-13 · 16m</div>
@@ -631,19 +604,19 @@
 <div class="schedule">
 
   <div class="day-card mon">
-    <div class="day-header"><div class="day-name">Monday</div><div class="day-focus">Walk + Boxing</div></div>
+    <div class="day-header"><div class="day-name">Monday</div><div class="day-focus">Walk + Intervals (4×4)</div></div>
     <div class="sessions">
       <div class="session-row"><div class="session-name">Fast Walk</div><div class="session-dur">20–30 min</div><div class="badge badge-z1">Z1</div></div>
-      <div class="session-row"><div class="session-name">Boxing</div><div class="session-dur">60 min</div><div class="badge badge-z2">Z2</div></div>
+      <div class="session-row"><div class="session-name">Intervals</div><div class="session-dur">20–25 min</div><div class="badge badge-z5">Z5</div></div>
     </div>
   </div>
 
   <div class="day-card tue">
-    <div class="day-header"><div class="day-name">Tuesday</div><div class="day-focus">Walk + Plyos + Intervals (4×4)</div></div>
+    <div class="day-header"><div class="day-name">Tuesday</div><div class="day-focus">Walk + Strength + Z2 Run</div></div>
     <div class="sessions">
       <div class="session-row"><div class="session-name">Fast Walk</div><div class="session-dur">20–30 min</div><div class="badge badge-z1">Z1</div></div>
-      <div class="session-row"><div class="session-name">Plyometrics</div><div class="session-dur">25–30 min</div><div class="badge badge-plyo">PLYO</div></div>
-      <div class="session-row"><div class="session-name">Intervals</div><div class="session-dur">20–25 min</div><div class="badge badge-z5">Z5</div></div>
+      <div class="session-row"><div class="session-name">Strength</div><div class="session-dur">60–75 min</div><div class="badge badge-str">STR</div></div>
+      <div class="session-row"><div class="session-name">Run</div><div class="session-dur">30 min</div><div class="badge badge-z2">Z2</div></div>
     </div>
   </div>
 
@@ -656,10 +629,11 @@
   </div>
 
   <div class="day-card thu">
-    <div class="day-header"><div class="day-name">Thursday</div><div class="day-focus">Walk + Strength</div></div>
+    <div class="day-header"><div class="day-name">Thursday</div><div class="day-focus">Walk + Long Plyos + Z2</div></div>
     <div class="sessions">
       <div class="session-row"><div class="session-name">Fast Walk</div><div class="session-dur">20–30 min</div><div class="badge badge-z1">Z1</div></div>
-      <div class="session-row"><div class="session-name">Strength</div><div class="session-dur">60–75 min</div><div class="badge badge-str">STR</div></div>
+      <div class="session-row"><div class="session-name">Plyometrics</div><div class="session-dur">25–30 min</div><div class="badge badge-plyo">PLYO</div></div>
+      <div class="session-row"><div class="session-name">Cardio</div><div class="session-dur">30 min</div><div class="badge badge-z2">Z2</div></div>
     </div>
   </div>
 
@@ -702,38 +676,38 @@
   
   <div style="display:flex;gap:8px;align-items:center;margin-bottom:5px;">
     <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:32px;flex-shrink:0;">MON</div>
-    <div style="flex:1;height:12px;background:#1e1e2e;border-radius:2px;overflow:hidden;display:flex;"><div style="width:21%;height:100%;background:#3b82f6;opacity:0.6"></div><div style="width:51%;height:100%;background:#22c55e"></div></div>
-    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:36px;text-align:right;flex-shrink:0;">85m</div>
+    <div style="flex:1;height:12px;background:#1e1e2e;border-radius:2px;overflow:hidden;display:flex;"><div style="width:25%;height:100%;background:#3b82f6;opacity:0.6"></div><div style="width:20%;height:100%;background:#ef4444"></div></div>
+    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:36px;text-align:right;flex-shrink:0;">55m</div>
   </div>
   <div style="display:flex;gap:8px;align-items:center;margin-bottom:5px;">
     <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:32px;flex-shrink:0;">TUE</div>
-    <div style="flex:1;height:12px;background:#1e1e2e;border-radius:2px;overflow:hidden;display:flex;"><div style="width:21%;height:100%;background:#3b82f6;opacity:0.6"></div><div style="width:19%;height:100%;background:#ef4444"></div><div style="width:23%;height:100%;background:#a855f7"></div></div>
-    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:36px;text-align:right;flex-shrink:0;">75m</div>
+    <div style="flex:1;height:12px;background:#1e1e2e;border-radius:2px;overflow:hidden;display:flex;"><div style="width:22%;height:100%;background:#3b82f6;opacity:0.6"></div><div style="width:56%;height:100%;background:#f59e0b"></div><div style="width:22%;height:100%;background:#22c55e"></div></div>
+    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:36px;text-align:right;flex-shrink:0;">135m</div>
   </div>
   <div style="display:flex;gap:8px;align-items:center;margin-bottom:5px;">
     <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:32px;flex-shrink:0;">WED</div>
-    <div style="flex:1;height:12px;background:#1e1e2e;border-radius:2px;overflow:hidden;display:flex;"><div style="width:21%;height:100%;background:#3b82f6;opacity:0.6"></div><div style="width:70%;height:100%;background:#22c55e"></div></div>
-    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:36px;text-align:right;flex-shrink:0;">110m</div>
+    <div style="flex:1;height:12px;background:#1e1e2e;border-radius:2px;overflow:hidden;display:flex;"><div style="width:25%;height:100%;background:#3b82f6;opacity:0.6"></div><div style="width:75%;height:100%;background:#22c55e"></div></div>
+    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:36px;text-align:right;flex-shrink:0;">120m</div>
   </div>
   <div style="display:flex;gap:8px;align-items:center;margin-bottom:5px;">
     <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:32px;flex-shrink:0;">THU</div>
-    <div style="flex:1;height:12px;background:#1e1e2e;border-radius:2px;overflow:hidden;display:flex;"><div style="width:21%;height:100%;background:#3b82f6;opacity:0.6"></div><div style="width:57%;height:100%;background:#f59e0b"></div></div>
+    <div style="flex:1;height:12px;background:#1e1e2e;border-radius:2px;overflow:hidden;display:flex;"><div style="width:25%;height:100%;background:#3b82f6;opacity:0.6"></div><div style="width:25%;height:100%;background:#a855f7"></div><div style="width:25%;height:100%;background:#22c55e"></div></div>
     <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:36px;text-align:right;flex-shrink:0;">90m</div>
   </div>
   <div style="display:flex;gap:8px;align-items:center;margin-bottom:5px;">
     <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:32px;flex-shrink:0;">FRI</div>
-    <div style="flex:1;height:12px;background:#1e1e2e;border-radius:2px;overflow:hidden;display:flex;"><div style="width:21%;height:100%;background:#3b82f6;opacity:0.6"></div><div style="width:14%;height:100%;background:#ef4444"></div></div>
-    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:36px;text-align:right;flex-shrink:0;">42m</div>
+    <div style="flex:1;height:12px;background:#1e1e2e;border-radius:2px;overflow:hidden;display:flex;"><div style="width:25%;height:100%;background:#3b82f6;opacity:0.6"></div><div style="width:17%;height:100%;background:#ef4444"></div></div>
+    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:36px;text-align:right;flex-shrink:0;">50m</div>
   </div>
   <div style="display:flex;gap:8px;align-items:center;margin-bottom:5px;">
     <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:32px;flex-shrink:0;">SAT</div>
-    <div style="flex:1;height:12px;background:#1e1e2e;border-radius:2px;overflow:hidden;display:flex;"><div style="width:57%;height:100%;background:#f59e0b"></div><div style="width:21%;height:100%;background:#3b82f6;opacity:0.6"></div></div>
-    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:36px;text-align:right;flex-shrink:0;">92m</div>
+    <div style="flex:1;height:12px;background:#1e1e2e;border-radius:2px;overflow:hidden;display:flex;"><div style="width:56%;height:100%;background:#f59e0b"></div><div style="width:22%;height:100%;background:#3b82f6;opacity:0.6"></div></div>
+    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:36px;text-align:right;flex-shrink:0;">105m</div>
   </div>
   <div style="display:flex;gap:8px;align-items:center;margin-bottom:5px;">
     <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:32px;flex-shrink:0;">SUN</div>
-    <div style="flex:1;height:12px;background:#1e1e2e;border-radius:2px;overflow:hidden;display:flex;"><div style="width:64%;height:100%;background:#22c55e"></div><div style="width:9%;height:100%;background:#a855f7"></div></div>
-    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:36px;text-align:right;flex-shrink:0;">85m</div>
+    <div style="flex:1;height:12px;background:#1e1e2e;border-radius:2px;overflow:hidden;display:flex;"><div style="width:69%;height:100%;background:#22c55e"></div><div style="width:8%;height:100%;background:#a855f7"></div></div>
+    <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);width:36px;text-align:right;flex-shrink:0;">100m</div>
   </div>
 </div>
 
@@ -742,7 +716,7 @@
   <div class="section-title">Weekly Targets</div>
   <div class="targets-grid">
     <div class="target"><div class="target-val" style="color:#22c55e">3.5–4.5h</div><div class="target-lbl">Zone 2</div></div>
-    <div class="target"><div class="target-val" style="color:#ef4444">20m</div><div class="target-lbl">Z4–5</div></div>
+    <div class="target"><div class="target-val" style="color:#ef4444">90–120m</div><div class="target-lbl">Z4–5</div></div>
     <div class="target"><div class="target-val" style="color:#3b82f6">~150m</div><div class="target-lbl">Walking</div></div>
     <div class="target"><div class="target-val" style="color:#f8f8f2">5.5–6.5h</div><div class="target-lbl">Cardio</div></div>
     <div class="target"><div class="target-val" style="color:#f59e0b">2×</div><div class="target-lbl">Strength</div></div>
