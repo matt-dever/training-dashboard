@@ -263,7 +263,7 @@
 
 <div class="header">
   <div class="title">TRAIN <span>HARD</span></div>
-  <div class="updated">Updated<br>Wed, Apr 29, 11:20 AM</div>
+  <div class="updated">Updated<br>Wed, Apr 29, 11:42 AM</div>
 </div>
 
 <!-- Power & Recovery -->
@@ -801,6 +801,14 @@
     <div class="target"><div class="target-val" style="color:#a855f7">2×</div><div class="target-lbl">Plyo</div></div>
   </div>
 </div>
+
+<script>
+  const _loadedAt = Date.now();
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && Date.now() - _loadedAt > 30 * 60 * 1000)
+      location.reload();
+  });
+</script>
 
 </body>
 </html>
